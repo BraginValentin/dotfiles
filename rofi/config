@@ -1,0 +1,8 @@
+# Rofi config file (1.0.1v).
+# By Valentin Braign.
+
+
+rofi.theme: /usr/share/rofi/themes/Arc-Dark.rasi
+rofi.lines: 10
+rofi.width: 30
+rofi.font: iosevka 12

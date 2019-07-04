@@ -1,0 +1,130 @@
+# i3 config file (1.0.1v).
+# By Valentin Braign.
+
+
+# Define names for default workspaces.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+
+# Autorun (dependencies: polybar, nitrogen, redshift, compton).
+exec setxkbmap "us,ru" ",winkeys" "grp:alt_shift_toggle"
+exec --no-startup-id polybar -r bar_one
+exec --no-startup-id nitrogen --restore &
+exec --no-startup-id redshift -l 51.19:58.28
+exec --no-startup-id compton -b
+
+# Simple good font for window titles.
+font iosevka 9
+
+# New window size.
+new_window pixel
+default_border pixel 5
+
+# Gaps for i3wm.
+gaps inner 15
+gaps outer 5
+
+# Buttom modifier.
+set $mod Mod4
+
+# Use Mouse+$mod to drag floating windows to their wanted position.
+floating_modifier $mod
+
+# Make screenshot.
+bindsym Print exec --no-startup-id scrot 'Screenshot %Y-%m-%d %H.%M.%S.png' -e 'mv "$f" ~/Изображения/Скриншоты'
+
+# start a terminal.
+bindsym $mod+Return exec urxvt
+
+# kill focused window.
+bindsym $mod+Shift+q kill
+
+# StaЕrt rofi.
+bindsym $mod+d exec --no-startup-id rofi -show run
+
+# Change focus.
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window.
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split in horizontal orientation.
+bindsym $mod+h split h
+
+# Split in vertical orientation.
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused container.
+bindsym $mod+f fullscreen toggle
+
+# Change container layout (stacked, tabbed, toggle).
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+
+# Toggle tiling / floating.
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling / floating windows.
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container.
+bindsym $mod+a focus parent
+
+# Switch to workspace.
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+
+# Move focused container to workspace.
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+
+# Reload the configuration file.
+bindsym $mod+Shift+c reload
+
+# Restart i3 session.
+bindsym $mod+Shift+r restart
+
+# Exit i3 session.
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes' 'i3-msg exit'"
+
+# Enable mode resize.
+bindsym $mod+r mode "resize"
+
+# Change resize window.
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode.
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # Back to normal: Enter or Escape or $mod+r.
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+# Color theme for i3wm border.
+# class                 border  bground text    indicator child_border
+client.focused          #7c8389 #7c8389 #7c8389 #7c8389   #7c8389
+client.focused_inactive #333333 #333333 #FFFFFF #333333   #333333
+client.unfocused        #333333 #333333 #888888 #333333   #333333
+client.urgent           #333333 #333333 #FFFFFF #900000   #900000
+client.placeholder      #333333 #333333 #FFFFFF #333333   #333333
+
+client.background       #333333
